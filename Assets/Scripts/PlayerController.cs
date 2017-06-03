@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.X)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
 		{
-
+			transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
 		}
 	}
 
