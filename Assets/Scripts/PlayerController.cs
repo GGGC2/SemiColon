@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.D)) //오른쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
 		}
 		else if (Input.GetKey(KeyCode.A)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
 
 		if (Input.GetKeyDown(KeyCode.Space) && jumpTime == 0) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
@@ -34,19 +34,13 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Z) && flipTime == 0) //중력 반전 횟수 1번, 바닥에 착지하면 초기화
 		{
 			flipTime++;
-			if (GetComponent<Rigidbody2D>().gravityScale == 1)
-            {
-                GetComponent<Rigidbody2D>().gravityScale = -1f;
-            }
-			else if (GetComponent<Rigidbody2D>().gravityScale == -1)
-            {
-                GetComponent<Rigidbody2D>().gravityScale = 1f;
-            }
+			FlipMethod ();
         }
 
 		if (Input.GetKeyDown(KeyCode.X)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
 		{
 			transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
+			FlipMethod ();
 		}
 	}
 
@@ -55,6 +49,17 @@ public class PlayerController : MonoBehaviour
 		if (coll.gameObject.tag == "Ground") {
 			jumpTime = 0;
 			flipTime = 0;
+		}
+	}
+
+	private void FlipMethod(){
+		if (GetComponent<Rigidbody2D>().gravityScale == 1)
+		{
+			GetComponent<Rigidbody2D>().gravityScale = -1f;
+		}
+		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
+		{
+			GetComponent<Rigidbody2D>().gravityScale = 1f;
 		}
 	}
 }
