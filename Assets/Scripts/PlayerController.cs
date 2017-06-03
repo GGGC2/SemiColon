@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	public float jumpHeight = 5;
 	private int jumpTime = 0;
 	private int flipTime = 0;
+	private int flipped = 0;
 
 	private void Start()
 	{
@@ -19,10 +20,12 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKey(KeyCode.D)) //오른쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
 			GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			Rotate (flipped, 0, 0);
 		}
 		else if (Input.GetKey(KeyCode.A)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
 			GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+			Rotate (flipped, 180, 0);
         }
 
 		if (Input.GetKeyDown(KeyCode.Space) && jumpTime == 0) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
@@ -57,11 +60,19 @@ public class PlayerController : MonoBehaviour
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
 			jumpHeight = -jumpHeight;
+			Rotate (180, 0, 0);
+			flipped = 180;
 		}
 		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = 1f;
 			jumpHeight = -jumpHeight;
+			Rotate (0, 0, 0);
+			flipped = 0;
 		}
+	}
+
+	private void Rotate(int x, int y, int z){
+		transform.rotation = Quaternion.Euler (x, y, z);
 	}
 }
