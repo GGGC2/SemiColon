@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public float moveSpeed;
-	public float jumpHeight = 3;
+	public float jumpHeight = 5;
 	private int jumpTime;
 
 	private void Start()
@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKey(KeyCode.RightArrow)) //오른쪽으로 이동, y 방향 이동속도는 그대로 유지
+		if (Input.GetKey(KeyCode.D)) //오른쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
-
+            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
 		}
-		else if (Input.GetKey(KeyCode.LeftArrow)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
+		else if (Input.GetKey(KeyCode.A)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
-
-		}
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+        }
 
 		if (Input.GetKeyDown(KeyCode.Space)) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
 		{
