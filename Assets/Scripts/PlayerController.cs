@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public float moveSpeed;
-	public float jumpHeight = 3;
+	public float jumpHeight = 5;
 	private int jumpTime;
 
 	private void Start()
