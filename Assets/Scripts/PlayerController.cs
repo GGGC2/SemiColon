@@ -28,19 +28,22 @@ public class PlayerController : MonoBehaviour
 			Rotate (flipped, 180, 0);
         }
 
+		if ((Input.GetKeyUp (KeyCode.D))||(Input.GetKeyUp (KeyCode.A))) {
+			GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+		}
 		if (Input.GetKeyDown(KeyCode.Space) && jumpTime == 0) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
 		{
 			jumpTime++;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
 		}
 		
-		if (Input.GetKeyDown(KeyCode.Z) && flipTime == 0) //중력 반전 횟수 1번, 바닥에 착지하면 초기화
+		if (Input.GetKeyDown(KeyCode.K) && flipTime == 0) //중력 반전 횟수 1번, 바닥에 착지하면 초기화
 		{
 			flipTime++;
 			FlipMethod ();
         }
 
-		if (Input.GetKeyDown(KeyCode.X)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
+		if (Input.GetKeyDown(KeyCode.J)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
 		{
 			transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
 			FlipMethod ();
