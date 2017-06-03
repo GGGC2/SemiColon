@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 			if (jumpTime == 0) {
 				GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
 				jumpTime++;
-				Debug.Log ("jump & " + jumpTime.ToString());
 			}
 		}
 		
@@ -48,7 +47,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (coll.gameObject.tag == "Ground") {
 			jumpTime = 0;
-			Debug.Log ("Set zero");
 		}
 	}
 }
