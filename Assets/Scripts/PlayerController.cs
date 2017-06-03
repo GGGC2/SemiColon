@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public float moveSpeed;
-	public float jumpHeight;
+	public float jumpHeight = 3;
 	private int jumpTime;
 
 	private void Start()
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space)) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
 		{
 			if (jumpTime == 0) {
-				GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+				GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
 				jumpTime++;
 			}
 		}
