@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float moveSpeed = 0;
+	public float moveSpeed = 3;
 	public float jumpHeight = 5;
 	private int jumpTime = 0;
 	private int flipTime = 0;
@@ -52,7 +52,8 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D coll) //바닥에 착지하는 것을 감지, 점프나 중력 반전 횟수 초기화 시켜야함
 	{
-		if (coll.gameObject.tag == "Ground") {
+		if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Wall Top") {
+			Debug.Log (coll.gameObject.tag);
 			jumpTime = 0;
 			flipTime = 0;
 		}
