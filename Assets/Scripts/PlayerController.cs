@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 	private void OnCollisionEnter2D(Collision2D coll) //바닥에 착지하는 것을 감지, 점프나 중력 반전 횟수 초기화 시켜야함
 	{
 		if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Wall Top") {
+			Debug.Log (coll.gameObject.tag);
 			jumpTime = 0;
 			flipTime = 0;
 		}
