@@ -56,10 +56,12 @@ public class PlayerController : MonoBehaviour
 		if (GetComponent<Rigidbody2D>().gravityScale == 1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
+			jumpHeight = -jumpHeight;
 		}
 		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = 1f;
+			jumpHeight = -jumpHeight;
 		}
 	}
 }
