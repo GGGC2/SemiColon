@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public float moveSpeed;
-	public float jumpSpeed;
+	public float jumpHeight;
+	private int jumpTime;
 
 	private void Start()
 	{
@@ -25,7 +26,10 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space)) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
 		{
-
+			if (jumpTime == 0) {
+				GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+				jumpTime++;
+			}
 		}
 		
 		if (Input.GetKeyDown(KeyCode.Z)) //중력 반전 횟수 1번, 바닥에 착지하면 초기화
@@ -41,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D coll) //바닥에 착지하는 것을 감지, 점프나 중력 반전 횟수 초기화 시켜야함
 	{
-
+		if (coll.gameObject.tag == "Ground") {
+			jumpTime = 0;
+		}
 	}
 }
