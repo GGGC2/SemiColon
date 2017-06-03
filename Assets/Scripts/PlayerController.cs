@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 	private int flipTime = 0;
 	private int flipped = 0;
 
+	public GameObject Fade;
+
 	private void Start()
 	{
 
@@ -56,6 +58,16 @@ public class PlayerController : MonoBehaviour
 			Debug.Log (coll.gameObject.tag);
 			jumpTime = 0;
 			flipTime = 0;
+		}
+		if (coll.gameObject.tag == "Key") {
+			Debug.Log (coll.gameObject.tag);
+			Destroy (coll.gameObject);
+			GetComponent<KeyScript> ().getkey();
+		}
+		if (coll.gameObject.tag == "Door") {
+			Debug.Log (coll.gameObject.tag);
+			Destroy (coll.gameObject);
+			Fade.GetComponent<NewBehaviourScript>().fade = true;
 		}
 	}
 
