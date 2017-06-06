@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	private int jumpTime;
 	private int flipTime;
 	private int flipped;
+	private int turned;
 
 	private void Start()
 	{
@@ -17,19 +18,22 @@ public class PlayerController : MonoBehaviour
 		jumpTime = 0;
 		flipTime = 0;
 		flipped = 0;
+		turned = 0;
 	}
 
 	private void Update()
 	{
 		if (Input.GetKey(KeyCode.D)) //오른쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
+			turned = 0;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-			Rotate (flipped, 0, 0);
+			turn (flipped, turned);
 		}
 		else if (Input.GetKey(KeyCode.A)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
+			turned = 180;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-			Rotate (flipped, 180, 0);
+			turn (flipped, turned);
         }
 
 		if ((Input.GetKeyUp (KeyCode.D))||(Input.GetKeyUp (KeyCode.A))) {
@@ -67,15 +71,19 @@ public class PlayerController : MonoBehaviour
 		if (GetComponent<Rigidbody2D>().gravityScale == 1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
-			Rotate (180, 0, 0);
 			flipped = 180;
+			turn (flipped, turned);
 		}
 		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = 1f;
-			Rotate (0, 0, 0);
 			flipped = 0;
+			turn (flipped, turned);
 		}
+	}
+
+	private void turn(int flipped, int turned){
+		Rotate (flipped, turned, 0);
 	}
 
 	private void Rotate(int x, int y, int z){ //캐릭터를 돌리는 메소드
