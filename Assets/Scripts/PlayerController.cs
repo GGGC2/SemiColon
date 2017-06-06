@@ -62,18 +62,17 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void FlipMethod(){ //반전을 시는 메소드
+	private void FlipMethod(){ //반전을 시키는 메소드
+		jumpHeight = -jumpHeight;
 		if (GetComponent<Rigidbody2D>().gravityScale == 1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
-			jumpHeight = -jumpHeight;
 			Rotate (180, 0, 0);
 			flipped = 180;
 		}
 		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = 1f;
-			jumpHeight = -jumpHeight;
 			Rotate (0, 0, 0);
 			flipped = 0;
 		}
