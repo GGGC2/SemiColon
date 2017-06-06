@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float moveSpeed = 3;
-	public float jumpHeight = 5;
-	private int jumpTime = 0;
-	private int flipTime = 0;
-	private int flipped = 0;
+	public float moveSpeed;
+	public float jumpHeight;
+	private int jumpTime;
+	private int flipTime;
+	private int flipped;
 
 	private void Start()
 	{
-
+		moveSpeed = 3;
+		jumpHeight = 5;
+		jumpTime = 0;
+		flipTime = 0;
+		flipped = 0;
 	}
 
 	private void Update()
