@@ -27,13 +27,13 @@ public class PlayerController : MonoBehaviour
 		{
 			turned = 0;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-			turn (flipped, turned);
+			Rotate (flipped, turned);
 		}
 		else if (Input.GetKey(KeyCode.A)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
 			turned = 180;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-			turn (flipped, turned);
+			Rotate (flipped, turned);
         }
 
 		if ((Input.GetKeyUp (KeyCode.D))||(Input.GetKeyUp (KeyCode.A))) {
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D coll) //바닥에 착지하는 것을 감지, 점프나 중력 반전 횟수 초기화 시켜야함
 	{
-		if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Wall Top") {
+		if (coll.gameObject.tag == "Ground") {
 			jumpTime = 0;
 			flipTime = 0;
 		}
@@ -72,21 +72,17 @@ public class PlayerController : MonoBehaviour
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
 			flipped = 180;
-			turn (flipped, turned);
+			Rotate (flipped, turned);
 		}
 		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = 1f;
 			flipped = 0;
-			turn (flipped, turned);
+			Rotate (flipped, turned);
 		}
 	}
 
-	private void turn(int flipped, int turned){
-		Rotate (flipped, turned, 0);
-	}
-
-	private void Rotate(int x, int y, int z){ //캐릭터를 돌리는 메소드
-		transform.rotation = Quaternion.Euler (x, y, z);
+	private void Rotate(int x, int y){ //캐릭터를 돌리는 메소드
+		transform.rotation = Quaternion.Euler (x, y, 0);
 	}
 }
