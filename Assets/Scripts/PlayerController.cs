@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void FlipMethod(){
+	private void FlipMethod(){ //반전을 시는 메소드
 		if (GetComponent<Rigidbody2D>().gravityScale == 1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void Rotate(int x, int y, int z){
+	private void Rotate(int x, int y, int z){ //캐릭터를 돌리는 메소드
 		transform.rotation = Quaternion.Euler (x, y, z);
 	}
 }
