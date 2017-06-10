@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
 		if (coll.gameObject.tag == "Door") {
 			Debug.Log (coll.gameObject.tag);
 			Destroy (coll.gameObject);
-			Fade.GetComponent<NewBehaviourScript>().fade = true;
 		}
 		if (coll.gameObject.tag == "Dead") {
 			Debug.Log ("You are died!");
