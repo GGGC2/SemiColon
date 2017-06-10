@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClearScript : MonoBehaviour {
 
-	bool Getkey;
+	public bool Getkey;
 	// Use this for initialization
 	void Start () {
 		Getkey = false;
@@ -25,6 +25,7 @@ public class ClearScript : MonoBehaviour {
 		}
 
 		if (coll.gameObject.tag == "Door") {
+            Debug.Log("ee");
 			if (Getkey) {
 				Debug.Log ("Clear");
 				Scene_manager.Instance.Scene_change ();

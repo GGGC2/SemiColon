@@ -76,9 +76,7 @@ public class PlayerController : MonoBehaviour
 			spaceTime = 0;
 		}
 		if (coll.gameObject.tag == "Key") {
-			Debug.Log (coll.gameObject.tag);
-			Destroy (coll.gameObject);
-
+			Debug.Log ("ee");
 		}
 		if (coll.gameObject.tag == "Door") {
 			Debug.Log (coll.gameObject.tag);
