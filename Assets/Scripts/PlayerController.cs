@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		moveSpeed = 3;
-		jumpHeight = 5;
+		jumpHeight = 4;
 		jumpTime = 0;
 		flipTime = 0;
 		flipped = 0;
