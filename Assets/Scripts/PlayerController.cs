@@ -78,11 +78,11 @@ public class PlayerController : MonoBehaviour
 		if (coll.gameObject.tag == "Key") {
 			Debug.Log (coll.gameObject.tag);
 			Destroy (coll.gameObject);
-			GetComponent<KeyScript> ().getkey();
+
 		}
 		if (coll.gameObject.tag == "Door") {
 			Debug.Log (coll.gameObject.tag);
-			Destroy (coll.gameObject);
+
 		}
 		if (coll.gameObject.tag == "Dead") {
 			Debug.Log ("You are died!");
