@@ -8,34 +8,17 @@ public class PlayerController : MonoBehaviour
 	public float jumpHeight;
 	private int jumpTime;
 	private int flipTime;
-<<<<<<< HEAD
-	private int flipped;
-	private int turned;
-
-	public GameObject Fade;
-
-	void Awake(){
-		
-	}
-=======
 	private int spaceTime;
 	private int flipped;
 	private int turned;
->>>>>>> bca7136b51a10ae8ef6881a76c6edbd29ee3b440
 
 	private void Start()
 	{
 		moveSpeed = 3;
-<<<<<<< HEAD
-		jumpHeight = 5;
-		jumpTime = 0;
-		flipTime = 0;
-=======
 		jumpHeight = 4;
 		jumpTime = 0;
 		flipTime = 0;
 		spaceTime = 0;
->>>>>>> bca7136b51a10ae8ef6881a76c6edbd29ee3b440
 		flipped = 0;
 		turned = 0;
 	}
