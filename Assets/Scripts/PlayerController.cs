@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 	public float moveSpeed;
 	public float jumpHeight;
+	public Sprite Lucyblack;
+	public Sprite Lucywhite;
 	private int jumpTime;
 	private int flipTime;
 	private int spaceTime;
@@ -57,9 +59,16 @@ public class PlayerController : MonoBehaviour
 		{
 			if (spaceTime < 2) {
 				transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
+				if (GetComponent<Rigidbody2D> ().gravityScale == 1) {
+					GetComponent<SpriteRenderer> ().sprite = Lucywhite;
+				}
+				else if (GetComponent<Rigidbody2D> ().gravityScale == -1) {
+					GetComponent<SpriteRenderer> ().sprite = Lucyblack;
+				}
 				FlipMethod ();
 				spaceTime++;
 			}
+
 		}
 		if (Input.GetKeyDown(KeyCode.R)) //재시작 메소드
 		{
