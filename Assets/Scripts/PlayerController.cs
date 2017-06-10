@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.R)) //재시작 메소드
 		{
-			Scene_manager.Instance.Scene_change ();
+			Scene_manager.Instance.Reload_this_scene ();
 			Time.timeScale = 1;
 		}
 	}
@@ -78,11 +78,11 @@ public class PlayerController : MonoBehaviour
 		if (coll.gameObject.tag == "Key") {
 			Debug.Log (coll.gameObject.tag);
 			Destroy (coll.gameObject);
-			GetComponent<KeyScript> ().getkey();
+
 		}
 		if (coll.gameObject.tag == "Door") {
 			Debug.Log (coll.gameObject.tag);
-			Destroy (coll.gameObject);
+
 		}
 		if (coll.gameObject.tag == "Dead") {
 			Debug.Log ("You are died!");
