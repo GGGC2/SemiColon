@@ -15,9 +15,9 @@ public class Scene_manager : MonoBehaviour {
 	// Use this for initialization
 
 	public void Scene_change(){
-		SceneManager.LoadScene ("Stage " + Next_scene.ToString ());
+		SceneManager.LoadScene (Next_scene);
 	}
 	public	void Reload_this_scene(){
-		SceneManager.LoadScene ("Stage " + this_scene.ToString());
+		SceneManager.LoadScene (this_scene);
 	}
 }

@@ -21,12 +21,13 @@ public class ClearScript : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "Key") {
 			Getkey = true;
-			Debug.Log ("True!!");
+			Destroy (coll.gameObject);
 		}
 
 		if (coll.gameObject.tag == "Door") {
 			if (Getkey) {
 				Debug.Log ("Clear");
+				Scene_manager.Instance.Scene_change ();
 			}
 		}
 	}
