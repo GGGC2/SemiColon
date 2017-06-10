@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float moveSpeed = 3;
-	public float jumpHeight = 5;
-	private int jumpTime = 0;
-	private int flipTime = 0;
-	private int flipped = 0;
+	public float moveSpeed;
+	public float jumpHeight;
+	private int jumpTime;
+	private int flipTime;
+	private int flipped;
+	private int turned;
 
 	public GameObject Fade;
 
+	void Awake(){
+		
+	}
+
 	private void Start()
 	{
-
+		moveSpeed = 3;
+		jumpHeight = 5;
+		jumpTime = 0;
+		flipTime = 0;
+		flipped = 0;
+		turned = 0;
 	}
 
 	private void Update()
 	{
 		if (Input.GetKey(KeyCode.D)) //오른쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
+			turned = 0;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-			Rotate (flipped, 0, 0);
+			Rotate (flipped, turned);
 		}
 		else if (Input.GetKey(KeyCode.A)) //왼쪽으로 이동, y 방향 이동속도는 그대로 유지
 		{
+			turned = 180;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-			Rotate (flipped, 180, 0);
+			Rotate (flipped, turned);
         }
 
 		if ((Input.GetKeyUp (KeyCode.D))||(Input.GetKeyUp (KeyCode.A))) {
@@ -50,12 +62,15 @@ public class PlayerController : MonoBehaviour
 			transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
 			FlipMethod ();
 		}
+		if (Input.GetKeyDown(KeyCode.R)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
+		{
+			Scene_manager.Instance.Scene_change ();
+		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D coll) //바닥에 착지하는 것을 감지, 점프나 중력 반전 횟수 초기화 시켜야함
 	{
-		if (coll.gameObject.tag == "Ground" || coll.gameObject.tag == "Wall Top") {
-			Debug.Log (coll.gameObject.tag);
+		if (coll.gameObject.tag == "Ground") {
 			jumpTime = 0;
 			flipTime = 0;
 		}
@@ -69,26 +84,37 @@ public class PlayerController : MonoBehaviour
 			Destroy (coll.gameObject);
 			Fade.GetComponent<NewBehaviourScript>().fade = true;
 		}
+		if (coll.gameObject.tag == "Dead") {
+			Debug.Log ("You are died!");
+			Dead ();
+		}
 	}
 
-	private void FlipMethod(){
+	
+	public void Dead(){
+		Time.timeScale = 0;
+		deathUI.SetActive (true);
+	}
+
+	private void FlipMethod(){ //반전을 시키는 메소드
+		jumpHeight = -jumpHeight;
 		if (GetComponent<Rigidbody2D>().gravityScale == 1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = -1f;
-			jumpHeight = -jumpHeight;
-			Rotate (180, 0, 0);
 			flipped = 180;
+			Rotate (flipped, turned);
 		}
 		else if (GetComponent<Rigidbody2D>().gravityScale == -1)
 		{
 			GetComponent<Rigidbody2D>().gravityScale = 1f;
-			jumpHeight = -jumpHeight;
-			Rotate (0, 0, 0);
 			flipped = 0;
+			Rotate (flipped, turned);
 		}
 	}
 
-	private void Rotate(int x, int y, int z){
-		transform.rotation = Quaternion.Euler (x, y, z);
+	private void Rotate(int x, int y){ //캐릭터를 돌리는 메소드
+		transform.rotation = Quaternion.Euler (x, y, 0);
 	}
+
+	GameObject deathUI;
 }

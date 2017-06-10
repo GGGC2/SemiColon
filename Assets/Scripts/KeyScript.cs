@@ -15,7 +15,7 @@ public class KeyScript : MonoBehaviour {
     {
         if(keytimes == 0)
         {
-            //스테이지 넘기기
+			Scene_manager.Instance.Scene_change();
         }
     }
 }
