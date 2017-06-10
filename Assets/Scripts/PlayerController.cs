@@ -61,6 +61,11 @@ public class PlayerController : MonoBehaviour
 				spaceTime++;
 			}
 		}
+		if (Input.GetKeyDown(KeyCode.R)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
+		{
+			Scene_manager.Instance.Scene_change ();
+			Time.timeScale = 1;
+		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D coll) //바닥에 착지하는 것을 감지, 점프나 중력 반전 횟수 초기화 시켜야함
@@ -70,6 +75,26 @@ public class PlayerController : MonoBehaviour
 			flipTime = 0;
 			spaceTime = 0;
 		}
+		if (coll.gameObject.tag == "Key") {
+			Debug.Log (coll.gameObject.tag);
+			Destroy (coll.gameObject);
+			GetComponent<KeyScript> ().getkey();
+		}
+		if (coll.gameObject.tag == "Door") {
+			Debug.Log (coll.gameObject.tag);
+			Destroy (coll.gameObject);
+			Fade.GetComponent<NewBehaviourScript>().fade = true;
+		}
+		if (coll.gameObject.tag == "Dead") {
+			Debug.Log ("You are died!");
+			Dead ();
+		}
+	}
+
+	
+	public void Dead(){
+		Time.timeScale = 0;
+		deathUI.SetActive (true);
 	}
 
 	private void FlipMethod(){ //반전을 시키는 메소드
@@ -91,4 +116,6 @@ public class PlayerController : MonoBehaviour
 	private void Rotate(int x, int y){ //캐릭터를 돌리는 메소드
 		transform.rotation = Quaternion.Euler (x, y, 0);
 	}
+
+	public	GameObject deathUI;
 }
