@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 				spaceTime++;
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.R)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
+		if (Input.GetKeyDown(KeyCode.R)) //재시작 메소드
 		{
 			Scene_manager.Instance.Reload_this_scene ();
 			Time.timeScale = 1;
