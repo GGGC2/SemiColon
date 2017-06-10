@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.R)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
 		{
 			Scene_manager.Instance.Scene_change ();
+			Time.timeScale = 1;
 		}
 	}
 
@@ -116,5 +117,5 @@ public class PlayerController : MonoBehaviour
 		transform.rotation = Quaternion.Euler (x, y, 0);
 	}
 
-	GameObject deathUI;
+	public	GameObject deathUI;
 }
