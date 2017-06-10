@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	public float jumpHeight;
 	private int jumpTime;
 	private int flipTime;
+<<<<<<< HEAD
 	private int flipped;
 	private int turned;
 
@@ -16,13 +17,25 @@ public class PlayerController : MonoBehaviour
 	void Awake(){
 		
 	}
+=======
+	private int spaceTime;
+	private int flipped;
+	private int turned;
+>>>>>>> bca7136b51a10ae8ef6881a76c6edbd29ee3b440
 
 	private void Start()
 	{
 		moveSpeed = 3;
+<<<<<<< HEAD
 		jumpHeight = 5;
 		jumpTime = 0;
 		flipTime = 0;
+=======
+		jumpHeight = 4;
+		jumpTime = 0;
+		flipTime = 0;
+		spaceTime = 0;
+>>>>>>> bca7136b51a10ae8ef6881a76c6edbd29ee3b440
 		flipped = 0;
 		turned = 0;
 	}
@@ -57,10 +70,13 @@ public class PlayerController : MonoBehaviour
 			FlipMethod ();
         }
 
-		if (Input.GetKeyDown(KeyCode.J)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
+		if (Input.GetKeyDown(KeyCode.J)) //공간 반전 횟수 무제한(아님), x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
 		{
-			transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
-			FlipMethod ();
+			if (spaceTime < 2) {
+				transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
+				FlipMethod ();
+				spaceTime++;
+			}
 		}
 		if (Input.GetKeyDown(KeyCode.R)) //공간 반전 횟수 무제한, x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
 		{
@@ -74,6 +90,7 @@ public class PlayerController : MonoBehaviour
 		if (coll.gameObject.tag == "Ground") {
 			jumpTime = 0;
 			flipTime = 0;
+			spaceTime = 0;
 		}
 		if (coll.gameObject.tag == "Key") {
 			Debug.Log (coll.gameObject.tag);
