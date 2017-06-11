@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
 		{
 			if (spaceTime < 2) {
 				transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
-				if (GetComponent<Rigidbody2D> ().gravityScale == 1) {
+				if (transform.position.y < 0f) {
 					GetComponent<SpriteRenderer> ().sprite = Lucywhite;
 				}
-				else if (GetComponent<Rigidbody2D> ().gravityScale == -1) {
+				else if (transform.position.y > 0f) {
 					GetComponent<SpriteRenderer> ().sprite = Lucyblack;
 				}
 				FlipMethod ();
