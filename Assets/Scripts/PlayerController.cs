@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	private int spaceTime;
 	private int flipped;
 	private int turned;
+	private Animator anim;
 
 	private void Start()
 	{
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour
 		spaceTime = 0;
 		flipped = 0;
 		turned = 0;
+
+		anim = GetComponent<Animator>();
+		anim.SetBool("IsBlack", true);
+		anim.SetBool("IsJump", false);
 	}
 
 	private void Update()
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.Space) && jumpTime == 0) //점프 횟수는 1번, 바닥에 착지하면 초기화, x방향 이동속도 그대로 유지
 		{
+			anim.SetBool("IsJump", true);
 			jumpTime++;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
 		}
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour
 		{
 			flipTime++;
 			FlipMethod ();
+			anim.SetBool("IsJump", true);
         }
 
 		if (Input.GetKeyDown(KeyCode.J)) //공간 반전 횟수 무제한(아님), x나 y 방향 이동속도는 부호만 바뀌고 그대로 유지
@@ -61,9 +68,11 @@ public class PlayerController : MonoBehaviour
 				transform.position = new Vector3 (transform.position.x,-1 * transform.position.y, 0);
 				if (transform.position.y < 0f) {
 					GetComponent<SpriteRenderer> ().sprite = Lucywhite;
+					anim.SetBool("IsBlack", false);
 				}
 				else if (transform.position.y > 0f) {
 					GetComponent<SpriteRenderer> ().sprite = Lucyblack;
+					anim.SetBool("IsBlack", true);
 				}
 				FlipMethod ();
 				spaceTime++;
@@ -83,6 +92,7 @@ public class PlayerController : MonoBehaviour
 			jumpTime = 0;
 			flipTime = 0;
 			spaceTime = 0;
+			anim.SetBool("IsJump", false);
 		}
 		if (coll.gameObject.tag == "Key") {
 			Debug.Log ("ee");
