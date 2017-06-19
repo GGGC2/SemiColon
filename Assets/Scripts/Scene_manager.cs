@@ -17,7 +17,22 @@ public class Scene_manager : MonoBehaviour {
 	public void Scene_change(){
 		SceneManager.LoadScene (Next_scene);
 	}
-	public	void Reload_this_scene(){
+	public void Reload_this_scene(){
 		SceneManager.LoadScene (this_scene);
+	}
+
+	public void HowToPlay()
+	{
+		SceneManager.LoadScene(7);
+	}
+
+	public void Credit()
+	{
+		SceneManager.LoadScene(8);
+	}
+
+	public void GoToHome()
+	{
+		SceneManager.LoadScene(0);
 	}
 }
