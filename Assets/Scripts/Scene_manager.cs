@@ -23,16 +23,16 @@ public class Scene_manager : MonoBehaviour {
 
 	public void HowToPlay()
 	{
-		SceneManager.LoadScene(7);
+		SceneManager.LoadScene(8);
 	}
 
 	public void Credit()
 	{
-		SceneManager.LoadScene(8);
+		SceneManager.LoadScene(9);
 	}
 
 	public void GoToHome()
 	{
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene(1);
 	}
 }
